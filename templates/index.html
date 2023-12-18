@@ -4,12 +4,12 @@
 {% block title %}  {% endblock %}
 
 {% block body %}
-
-<div class="container-fluid">
+<!--Верстаем окно заголовка-->
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12">
             <div class="m-3 p-3 bg-dark-subtle text-black">
-               <h2>Сведения о вычислительной технике <button type="button" class="btn btn-success float-end" data-toggle="modal" data-target="#mymodal">Добавить новую запись</button></h2>
+               <h2>Сведения о вычислительной технике <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#mymodal">Добавить новую запись</button></h2>
                 <table class="table table-hover table-dark">
                     <tr>
                         <th>ID</th>
@@ -21,7 +21,7 @@
                         <th>Имя СВТ в домене</th>
                         <th>Имя пользователя</th>
                         <th>Тип ОС</th>
-                        <th>Действие</th>
+                        <th>Требуемое действие</th>
                     </tr>
                     <tr>
                         <td>1</td>
@@ -33,20 +33,182 @@
                         <td>3178-е654-01</td>
                         <td>Петров П.П.</td>
                         <td>Linux</td>
+
                         <td>
-                            <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modaledit">Редактировать </a>
-                            <a href="" class="btn btn-warning btn-sm" onclick="">Редактировать </a>
+                            <a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit">Редактировать </a>
+                            <a href="" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить запись?')">Удалить </a>
                         </td>
                     </tr>
 
+                    <!-- Модальное окно редактирвания-->
+                 <div id="modaledit" class="modal fade" role="dialog">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h4 class="modal-title">Редактировать данные:</h4>
+                           </div>
 
+                           <div class="modal-body">
+                               <form action="" method="post">
+
+                                   <!-- Поля для окна -->
+                                   <div class="mb-3">
+                                       <label>Тип СВТ:</label>
+                                       <input type="hidden" name="id" value="id">
+                                        <select class="form-select">
+                                            <option selected>Выберите из списка</option>
+                                            <option value="1">ПЭВМ</option>
+                                            <option value="2">Моноблок</option>
+                                            <option value="3">Ноутбук</option>
+                                        </select>
+                                   </div>
+
+                                   <div class="mb-3">
+                                <label>Отделение:</label>
+                                <select class="form-select">
+                                    <option selected>Выберите из списка</option>
+                                    <option value="1">Отделение связи и ИТ</option>
+                                    <option value="2">Инженерно-технический отдел</option>
+                                </select>
+                                </div>
+
+                                   <div class="mb-3">
+                                    <label>МОЛ:</label>
+                                    <input type="text" class="form-control" name="mol" required="1">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Инвентарный номер:</label>
+                                    <input type="text" class="form-control" name="inv" required="1">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Серийный номер:</label>
+                                    <input type="text" class="form-control" name="serial" required="1">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Имя СВТ в домене:</label>
+                                    <input type="text" class="form-control" name="namedomain" required="1">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label>Имя пользователя:</label>
+                                    <input type="text" class="form-control" name="nameuser" required="1">
+                                </div>
+
+                                 <div class="mb-3">
+                                    <label>Тип ОС:</label>
+                                    <select class="form-select">
+                                        <option selected>Выберите из списка</option>
+                                        <option value="1">AL Smolensk 1.6</option>
+                                        <option value="2">AL Smolensk 1.7</option>
+                                        <option value="3">AL "Орёл"</option>
+                                        <option value="4">Windows 7</option>
+                                        <option value="5">Windows 10</option>
+                                        <option value="5">Windows Server 2008</option>
+                                        <option value="5">Windows Server 2012</option>
+                                    </select>
+
+                                </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" type="submit">Обновить</button>
+                                        <button type="button" class="btn btn-secondary text-center" data-bs-dismiss="modal">Отменить</button>
+                                    </div>
+                               </form>
+
+                           </div>
+                       </div>
+                   </div>
+                 </div>
                 </table>
-
-
             </div>
+
+            <!-- Модальное окно главное-->
+            <div id="mymodal" class="modal fade" role="dialog">
+                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                <h4 class="modal-title">Добавление новой записи в базу:</h4>
+            </div>
+                          <form action="{{url_for('insert')}}" method="POST">
+
+                              <div class="mb-3">
+                                  <label>Тип СВТ:</label>
+                                  <select class="form-select" name="typesvt">
+                                      <option selected>Выберите из списка</option>
+                                      <option id="1">ПЭВМ</option>
+                                      <option id="2">Моноблок</option>
+                                      <option id="3">Ноутбук</option>
+                                  </select>
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>Отделение:</label>
+                                  <select class="form-select" name="otd">
+                                      <option selected>Выберите из списка</option>
+                                      <optgroup label="Терапевтический корпус">
+                                      <option id="4">Отделение связи и ИТ</option>
+                                      <option id="5">Инженерно-технический отдел</option>
+                                      </optgroup>
+                                  </select>
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>МОЛ:</label>
+                                  <input type="text" class="form-control" name="mol">
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>Инвентарный номер:</label>
+                                  <input type="text" class="form-control" name="inv">
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>Серийный номер:</label>
+                                  <input type="text" class="form-control" name="serial">
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>Имя СВТ в домене:</label>
+                                  <input type="text" class="form-control" name="namedomain">
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>Имя пользователя:</label>
+                                  <input type="text" class="form-control" name="nameuser">
+                              </div>
+
+                              <div class="mb-3">
+                                  <label>Тип ОС:</label>
+                                  <select class="form-select" name="typeos" id="typeos">
+                                      <option selected>Выберите из списка</option>
+                                      <option value="1">AL Smolensk 1.6</option>
+                                      <option value="2">AL Smolensk 1.7</option>
+                                      <option value="3">AL "Орёл"</option>
+                                      <option value="4">Windows 7</option>
+                                      <option value="5">Windows 10</option>
+                                      <option value="6">Windows Server 2008</option>
+                                      <option value="7">Windows Server 2012</option>
+                                  </select>
+                              </div>
+
+                              <div class="mb-3">
+                                  <button class="btn btn-primary" type="submit">Добавить</button>
+                                  <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Закрыть</button>
+                              </div>
+
+
+
+                          </form>
+            </div>
+
+
         </div>
     </div>
-
 </div>
-
+        </div>
+        </div>
+    </div>
 {% endblock %}
