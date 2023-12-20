@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% include 'headers.html' %}
+
+{% block title %} Добавление записи {% endblock %}
+
+{% block body %}
+
+<!--<div class="modal fade" role="dialog">-->
+<!--    <div class="modal-dialog modal-lg modal-dialog-scrollable">-->
+<!--                      <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!--                <h4 class="modal-title">Добавление новой записи в базу:</h4>-->
+<!--                        </div>-->
+
+<!--                      </div>-->
+<!--        </div>-->
+<!--</div>-->
+<div class="container">
+    <form method="post" action="">
+        <table class="table">
+            <tr>
+                <td>Тип СВТ:</td>
+                <td><input type="text" name="typesvt" class="form-control"></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -5,7 +5,8 @@
 
 {% block body %}
 <!--Верстаем окно заголовка-->
-<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-12">
             <div class="m-3 p-3 bg-dark-subtle text-black">
@@ -23,91 +24,102 @@
                         <th>Тип ОС</th>
                         <th>Требуемое действие</th>
                     </tr>
+
+                    {% for row in employees %}
                     <tr>
-                        <td>1</td>
-                        <td>Моноблок</td>
-                        <td>Хирургическое</td>
-                        <td>Холодова Т.С.</td>
-                        <td>123654789</td>
-                        <td>123f654e789</td>
-                        <td>3178-е654-01</td>
-                        <td>Петров П.П.</td>
-                        <td>Linux</td>
+                        <td>{{row.id}}</td>
+                        <td>{{row.typesvt}}</td>
+                        <td>{{row.otd}}</td>
+                        <td>{{row.mol}}</td>
+                        <td>{{row.inv}}</td>
+                        <td>{{row.serial}}</td>
+                        <td>{{row.namedomain}}</td>
+                        <td>{{row.nameuser}}</td>
+                        <td>{{row.typeos}}</td>
 
                         <td>
-                            <a href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit">Редактировать </a>
-                            <a href="" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить запись?')">Удалить </a>
+<!--                            <a href="/update/{{row.id}}" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">Редактировать </a>-->
+                            <span style="margin:auto; font-size:20px; color: #ffc720">
+                              <a href="/update/{{row.id}}"></a> <i class="fas fa-edit"  data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}"></i>
+                            </span>
+                                |
+                            <span style= "font-size:20px; color: red">
+                                <a href=""><i class="fas fa-trash-alt" style="color: red" onclick="return confirm('Вы действительно хотите удалить запись?')"></i></a>
+                            </span>
+<!--                            <a href="" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить запись?')">Удалить </a>-->
                         </td>
                     </tr>
 
                     <!-- Модальное окно редактирвания-->
-                 <div id="modaledit" class="modal fade" role="dialog">
-                   <div class="modal-dialog">
-                       <div class="modal-content">
+                 <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                     <div class="modal-dialog">
+                     <div class="modal-content">
                            <div class="modal-header">
                                <h4 class="modal-title">Редактировать данные:</h4>
                            </div>
 
                            <div class="modal-body">
-                               <form action="" method="post">
-
+                               <form action="{{url_for('update')}}" method="post">
                                    <!-- Поля для окна -->
                                    <div class="mb-3">
                                        <label>Тип СВТ:</label>
-                                       <input type="hidden" name="id" value="id">
+                                       <input type="hidden" name="id" value="{{row.id}}">
+                                        <input size="50" name = "typesvt" value="{{row.typesvt}}" disabled style="border: none">
                                         <select class="form-select">
                                             <option selected>Выберите из списка</option>
-                                            <option value="1">ПЭВМ</option>
-                                            <option value="2">Моноблок</option>
-                                            <option value="3">Ноутбук</option>
+                                            <option value="ПЭВМ">ПЭВМ</option>
+                                            <option value="Моноблок">Моноблок</option>
+                                            <option value="Ноутбук">Ноутбук</option>
                                         </select>
                                    </div>
 
                                    <div class="mb-3">
                                 <label>Отделение:</label>
+                                <input size="50" name = "otd" value="{{row.otd}}" disabled style="border: none">
                                 <select class="form-select">
                                     <option selected>Выберите из списка</option>
-                                    <option value="1">Отделение связи и ИТ</option>
-                                    <option value="2">Инженерно-технический отдел</option>
+                                    <option value="ОС и ИТ">ОС и ИТ</option>
+                                    <option value="ИТО">ИТО</option>
                                 </select>
                                 </div>
 
                                    <div class="mb-3">
                                     <label>МОЛ:</label>
-                                    <input type="text" class="form-control" name="mol" required="1">
+                                    <input type="text" class="form-control" name="mol" value="{{row.mol}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label>Инвентарный номер:</label>
-                                    <input type="text" class="form-control" name="inv" required="1">
+                                    <input type="text" class="form-control" name="inv" value="{{row.inv}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label>Серийный номер:</label>
-                                    <input type="text" class="form-control" name="serial" required="1">
+                                    <input type="text" class="form-control" name="serial" value="{{row.serial}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label>Имя СВТ в домене:</label>
-                                    <input type="text" class="form-control" name="namedomain" required="1">
+                                    <input type="text" class="form-control" name="namedomain" value="{{row.namedomain}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label>Имя пользователя:</label>
-                                    <input type="text" class="form-control" name="nameuser" required="1">
+                                    <input type="text" class="form-control" name="nameuser" value="{{row.nameuser}}">
                                 </div>
 
                                  <div class="mb-3">
                                     <label>Тип ОС:</label>
+                                     <input name = "typeos" value="{{row.typeos}}" disabled style="border: none">
                                     <select class="form-select">
                                         <option selected>Выберите из списка</option>
-                                        <option value="1">AL Smolensk 1.6</option>
-                                        <option value="2">AL Smolensk 1.7</option>
-                                        <option value="3">AL "Орёл"</option>
-                                        <option value="4">Windows 7</option>
-                                        <option value="5">Windows 10</option>
-                                        <option value="5">Windows Server 2008</option>
-                                        <option value="5">Windows Server 2012</option>
+                                        <option value="AL Smolensk 1.6">AL Smolensk 1.6</option>
+                                        <option value="AL Smolensk 1.7">AL Smolensk 1.7</option>
+                                        <option value="AL Орёл">AL "Орёл"</option>
+                                        <option value="Windows 7">Windows 7</option>
+                                        <option value="Windows 10">Windows 10</option>
+                                        <option value="Windows Server 2008">Windows Server 2008</option>
+                                        <option value="Windows Server 2012">Windows Server 2012</option>
                                     </select>
 
                                 </div>
@@ -120,11 +132,14 @@
                            </div>
                        </div>
                    </div>
-                 </div>
-                </table>
-            </div>
+</div>
 
-            <!-- Модальное окно главное-->
+                        {% endfor %}
+            </table>
+
+        </div>
+
+            <!-- Модальное окно создания-->
             <div id="mymodal" class="modal fade" role="dialog">
                  <div class="modal-dialog modal-lg modal-dialog-scrollable">
                       <div class="modal-content">
@@ -132,25 +147,29 @@
 
                 <h4 class="modal-title">Добавление новой записи в базу:</h4>
             </div>
+
+            <div class="modal-body">
                           <form action="{{url_for('insert')}}" method="POST">
 
                               <div class="mb-3">
                                   <label>Тип СВТ:</label>
                                   <select class="form-select" name="typesvt">
                                       <option selected>Выберите из списка</option>
-                                      <option id="1">ПЭВМ</option>
-                                      <option id="2">Моноблок</option>
-                                      <option id="3">Ноутбук</option>
+                                      <option value="ПЭВМ">ПЭВМ</option>
+                                      <option value="Моноблок">Моноблок</option>
+                                      <option value="Ноутбук">Ноутбук</option>
                                   </select>
+
                               </div>
 
                               <div class="mb-3">
                                   <label>Отделение:</label>
+<!--                                  <input name="otd" >-->
                                   <select class="form-select" name="otd">
-                                      <option selected>Выберите из списка</option>
+<!--                                      <option selected>Выберите из списка</option>-->
                                       <optgroup label="Терапевтический корпус">
-                                      <option id="4">Отделение связи и ИТ</option>
-                                      <option id="5">Инженерно-технический отдел</option>
+                                      <option value="ОС и ИТ">ОС и ИТ</option>
+                                      <option value="ИТО">ИТО</option>
                                       </optgroup>
                                   </select>
                               </div>
@@ -182,15 +201,16 @@
 
                               <div class="mb-3">
                                   <label>Тип ОС:</label>
-                                  <select class="form-select" name="typeos" id="typeos">
+<!--                                  <input name="typeos">-->
+                                  <select class="form-select" name="typeos">
                                       <option selected>Выберите из списка</option>
-                                      <option value="1">AL Smolensk 1.6</option>
-                                      <option value="2">AL Smolensk 1.7</option>
-                                      <option value="3">AL "Орёл"</option>
-                                      <option value="4">Windows 7</option>
-                                      <option value="5">Windows 10</option>
-                                      <option value="6">Windows Server 2008</option>
-                                      <option value="7">Windows Server 2012</option>
+                                      <option value="AL Smolensk 1.6">AL Smolensk 1.6</option>
+                                      <option value="AL Smolensk 1.7">AL Smolensk 1.7</option>
+                                      <option value="AL Орёл">AL "Орёл"</option>
+                                      <option value="Windows 7">Windows 7</option>
+                                      <option value="Windows 10">Windows 10</option>
+                                      <option value="Windows Server 2008">Windows Server 2008</option>
+                                      <option value="Windows Server 2012">Windows Server 2012</option>
                                   </select>
                               </div>
 
@@ -199,9 +219,10 @@
                                   <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Закрыть</button>
                               </div>
 
-
-
                           </form>
+            </div>
+
+
             </div>
 
 
