@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login.utils import _secret_key
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import False_
+from sqlalchemy.ext import mypy
 from sqlalchemy.testing import db
 
 app = Flask(__name__)
@@ -63,9 +64,10 @@ def insert():
         nameuser = request.form['nameuser']
         typeos = request.form['typeos']
 
-        my_svt = SVT(typesvt, otd, mol, inv, serial, namedomain, nameuser, typeos)
+        my_svt = SVT (typesvt, otd, mol, inv, serial, namedomain, nameuser, typeos)
         db.session.add(my_svt)
         db.session.commit()
+
         return redirect(url_for('index'))
 
 

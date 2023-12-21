@@ -50,7 +50,7 @@
                         </td>
                     </tr>
 
-                    <!-- Модальное окно редактирвания-->
+                    <!-- Модальное окно редактирования-->
                  <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
                      <div class="modal-dialog">
                      <div class="modal-content">
@@ -59,28 +59,28 @@
                            </div>
 
                            <div class="modal-body">
-                               <form action="{{url_for('update')}}" method="post">
+                               <form action="{{url_for('update')}}" method="POST">
                                    <!-- Поля для окна -->
                                    <div class="mb-3">
                                        <label>Тип СВТ:</label>
                                        <input type="hidden" name="id" value="{{row.id}}">
-                                        <input size="50" name = "typesvt" value="{{row.typesvt}}" disabled style="border: none">
-                                        <select class="form-select">
-                                            <option selected>Выберите из списка</option>
-                                            <option value="ПЭВМ">ПЭВМ</option>
-                                            <option value="Моноблок">Моноблок</option>
-                                            <option value="Ноутбук">Ноутбук</option>
-                                        </select>
+                                       <input type="text" size="50" value="{{row.typesvt}}"  disabled style="border: none">
+                                             <select class="form-select" name="typesvt" type="text" id="{{row.typesvt}}">
+                                                 <option selected>Выберите из списка</option>
+                                                 <option value="ПЭВМ">ПЭВМ</option>
+                                                 <option value="Моноблок">Моноблок</option>
+                                                 <option value="Ноутбук">Ноутбук</option>
+                                             </select>
                                    </div>
 
                                    <div class="mb-3">
-                                <label>Отделение:</label>
-                                <input size="50" name = "otd" value="{{row.otd}}" disabled style="border: none">
-                                <select class="form-select">
-                                    <option selected>Выберите из списка</option>
-                                    <option value="ОС и ИТ">ОС и ИТ</option>
-                                    <option value="ИТО">ИТО</option>
-                                </select>
+                                       <label>Отделение:</label>
+                                       <input type="text" size="50" value="{{row.otd}}"  disabled style="border: none">
+                                             <select class="form-select" name="otd" type="text" id="{{row.otd}}">
+                                                <option selected>Выберите из списка</option>
+                                                <option value="ОС и ИТ">ОС и ИТ</option>
+                                                <option value="ИТО">ИТО</option>
+                                             </select>
                                 </div>
 
                                    <div class="mb-3">
@@ -110,8 +110,8 @@
 
                                  <div class="mb-3">
                                     <label>Тип ОС:</label>
-                                     <input name = "typeos" value="{{row.typeos}}" disabled style="border: none">
-                                    <select class="form-select">
+                                  <input type="text" size="50" value="{{row.typeos}}"  disabled style="border: none">
+                                    <select class="form-select" name="typeos" type="text" id="{{row.typeos}}">
                                         <option selected>Выберите из списка</option>
                                         <option value="AL Smolensk 1.6">AL Smolensk 1.6</option>
                                         <option value="AL Smolensk 1.7">AL Smolensk 1.7</option>
@@ -201,7 +201,6 @@
 
                               <div class="mb-3">
                                   <label>Тип ОС:</label>
-<!--                                  <input name="typeos">-->
                                   <select class="form-select" name="typeos">
                                       <option selected>Выберите из списка</option>
                                       <option value="AL Smolensk 1.6">AL Smolensk 1.6</option>
