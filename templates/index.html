@@ -10,6 +10,25 @@
     <div class="row">
         <div class="col-md-12">
             <div class="m-3 p-3 bg-dark-subtle text-black">
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                    {{message}}
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+
+                {% endwith %}
                <h2>Сведения о вычислительной технике <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#mymodal">Добавить новую запись</button></h2>
                 <table class="table table-hover table-dark">
                     <tr>
@@ -22,7 +41,9 @@
                         <th>Имя СВТ в домене</th>
                         <th>Имя пользователя</th>
                         <th>Тип ОС</th>
+                        <th>Дополнительно</th>
                         <th>Требуемое действие</th>
+
                     </tr>
 
                     {% for row in employees %}
@@ -36,6 +57,7 @@
                         <td>{{row.namedomain}}</td>
                         <td>{{row.nameuser}}</td>
                         <td>{{row.typeos}}</td>
+                        <td>{{row.additionale}}</td>
 
                         <td>
 <!--                            <a href="/update/{{row.id}}" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">Редактировать </a>-->
@@ -44,7 +66,7 @@
                             </span>
                                 |
                             <span style= "font-size:20px; color: red">
-                                <a href=""><i class="fas fa-trash-alt" style="color: red" onclick="return confirm('Вы действительно хотите удалить запись?')"></i></a>
+                                <a href="/delete/{{row.id}}"><i class="fas fa-trash-alt" style="color: red" onclick="return confirm('Вы действительно хотите удалить запись?')"></i></a>
                             </span>
 <!--                            <a href="" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить запись?')">Удалить </a>-->
                         </td>
@@ -61,6 +83,7 @@
                            <div class="modal-body">
                                <form action="{{url_for('update')}}" method="POST">
                                    <!-- Поля для окна -->
+
                                    <div class="mb-3">
                                        <label>Тип СВТ:</label>
                                        <input type="hidden" name="id" value="{{row.id}}">
@@ -144,14 +167,13 @@
                  <div class="modal-dialog modal-lg modal-dialog-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
-
-                <h4 class="modal-title">Добавление новой записи в базу:</h4>
-            </div>
-
+                             <h4 class="modal-title">Добавление новой записи в базу:</h4>
+                        </div>
             <div class="modal-body">
-                          <form action="{{url_for('insert')}}" method="POST">
-
-                              <div class="mb-3">
+             <form action="{{url_for('insert')}}" method="POST">
+                 <div class="row">
+                     <div class="col-md-6">
+                              <div class="container-fluid">
                                   <label>Тип СВТ:</label>
                                   <select class="form-select" name="typesvt">
                                       <option selected>Выберите из списка</option>
@@ -159,12 +181,10 @@
                                       <option value="Моноблок">Моноблок</option>
                                       <option value="Ноутбук">Ноутбук</option>
                                   </select>
-
                               </div>
 
-                              <div class="mb-3">
+                                    <div class="container-fluid">
                                   <label>Отделение:</label>
-<!--                                  <input name="otd" >-->
                                   <select class="form-select" name="otd">
 <!--                                      <option selected>Выберите из списка</option>-->
                                       <optgroup label="Терапевтический корпус">
@@ -174,32 +194,34 @@
                                   </select>
                               </div>
 
-                              <div class="mb-3">
+                              <div class="container-fluid">
                                   <label>МОЛ:</label>
                                   <input type="text" class="form-control" name="mol">
                               </div>
 
-                              <div class="mb-3">
+                              <div class="container-fluid">
                                   <label>Инвентарный номер:</label>
                                   <input type="text" class="form-control" name="inv">
                               </div>
+                                </div>
 
-                              <div class="mb-3">
+                              <div class="col-md-6">
+                              <div class="container-fluid">
                                   <label>Серийный номер:</label>
                                   <input type="text" class="form-control" name="serial">
                               </div>
 
-                              <div class="mb-3">
+                                  <div class="container-fluid">
                                   <label>Имя СВТ в домене:</label>
                                   <input type="text" class="form-control" name="namedomain">
                               </div>
 
-                              <div class="mb-3">
+                              <div class="container-fluid">
                                   <label>Имя пользователя:</label>
                                   <input type="text" class="form-control" name="nameuser">
                               </div>
 
-                              <div class="mb-3">
+                              <div class="container-fluid">
                                   <label>Тип ОС:</label>
                                   <select class="form-select" name="typeos">
                                       <option selected>Выберите из списка</option>
@@ -212,13 +234,32 @@
                                       <option value="Windows Server 2012">Windows Server 2012</option>
                                   </select>
                               </div>
+                               </div>
+                              <div class="col-md-12">
+                              <div class="container-fluid">
+                                   <label>Дополнительно:</label>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" name="additionale[]" value="МИС">
+                                      <input name="additionale" type="hidden" value="">
 
-                              <div class="mb-3">
-                                  <button class="btn btn-primary" type="submit">Добавить</button>
-                                  <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Закрыть</button>
+                                      <label class="form-check-label">МИС</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" name="additionale[]" value="АрхиМед">
+                                      <input name="additionale" type="hidden" value="">
+                                      <label class="form-check-label">АрхиМед</label>
+                                  </div>
                               </div>
+                              </div>
+                           </div>
 
-                          </form>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="submit">Добавить</button>
+      <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Закрыть</button>
+   </div>
+
+
+             </form>
             </div>
 
 

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+<link href="{{url_for('static', filename = 'css/style.css')}}" rel="stylesheet"/>
+<body class="bg-nav">
+    <h1>Добро пожаловать на страницу авторизации БД "Учёт СВТ ГВКГ"</h1>
+    <div class="container-fluid">
+<!--        <nav class="navbar">-->
+<!--      <a href="" class="navbar-brand text-light"> Test</a>-->
+<!--        </nav>-->
+        <div class="row">
+<!--            <div class="col">-->
+                <div class="card" style="width: 25rem; margin: 70px auto auto;" >
+                    <div class="card-body">
+                        <form class="form">
+                            <label>e-mail:</label><br>
+                            <input type="email" class="form-control"><br>
+                            <label>Пароль:</label>
+                            <input type="password" class="form-control"><br>
+                            <input type="submit" class="btn btn-primary block btn-small" value="Войти">
+                        </form>
+                        <p class="mt-2">Вы не зарегистрированы? <a href="/registration">Регистрация</a></p>
+                    </div>
+                </div>
+<!--            </div>-->
+        </div>
+
+    </div>
+</body>
+
+{% endblock %}

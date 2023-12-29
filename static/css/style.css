@@ -1,0 +1,26 @@
+.bg-nav{
+    background: #525252;
+    background: -webkit-linear-gradient(to right, #3d72b4, #525252);
+    background: linear-gradient(to right, #3d72b4, #525252);
+}
+
+.bg-header{
+    background: #304352;
+    background: -webkit-linear-gradient(to right, #d7d2cc, #304352);
+    background: linear-gradient(to right, #d7d2cc, #304352);
+}
+
+h1{
+    margin-top: 25px;
+    text-align: center;
+    color: #d1e7dd;
+    font-family: "Times New Roman";
+    font-size: 20pt;
+}
+.block{
+    display: block;
+    width: 100%;
+    border: none;
+
+
+}
