@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block body %}
+<link href="{{url_for('static', filename = 'css/style.css')}}" rel="stylesheet"/>
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="fa-flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+<body class="bg-nav">
+<!--    <h1>Добро пожаловать на страничку авторизации</h1>-->
+    <div class="container-fluid">
+<!--        <nav class="navbar">-->
+<!--      <a href="" class="navbar-brand text-light"> Test</a>-->
+<!--        </nav>-->
+        <div class="row">
+<!--            <div class="col">-->
+                <div class="card border-dark mb-3" style="width: 25rem; margin: 90px auto auto; border-color: #1a1d20" >
+{#                    <div class="card-header" style="text-align: center">Форма регистрации</div>#}
+                    <div class="card-body">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class="fa-flash">
+                                {% for message in messages %}
+                                    <li>{{message}}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <p class="mt-2" style="text-align: center"><b>Форма регистрации</b></p>
+                        <form class="form" action="/registration" method="post">
+                            <label>Ф.И.О:</label><br>
+                            <input type="text" class="form-control" name="FIO"><br>
+                            <label>Логин:</label><br>
+                            <input type="text" class="form-control" name="login"><br>
+                            <label>Пароль:</label>
+                            <input type="password" class="form-control" name="passw"><br>
+                            <label>Повторите пароль:</label>
+                            <input type="password" class="form-control" name="passw2"><br>
+                            <input type="submit" class="btn btn-primary block btn-small" value="Зарегистрироваться">
+                        </form>
+<!--                        <p class="mt-2">Регистрация прошла успешно? <a href="/login">На страницу входа</a></p>-->
+                    </div>
+{#                 <div class="card-footer border-dark"><p class="mt-2">Вернуться: <a href="/Uchet/static">на страницу входа</a></p></div>#}
+                </div>
+
+
+<!--            </div>-->
+        </div>
+
+    </div>
+</body>
+
+{% endblock %}
