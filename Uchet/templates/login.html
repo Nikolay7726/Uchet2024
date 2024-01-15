@@ -12,22 +12,39 @@
                 <div class="card" style="width: 25rem; margin: 70px auto auto;" >
                     <div class="card-body">
 
-                        {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                                <ul class="fa-flash">
-                                {% for message in messages %}
-                                    <li>{{message}}</li>
-                                {% endfor %}
+                        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                        {% if errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <ul style="list-style: none" >
+                                     {%- for msg in errors %}
+                                     <li>{{ msg }}</li>
+                                     {% endfor %}
                                 </ul>
-                            {% endif %}
+                            </div>
+                        {% endif %}
+                        {% endwith %}
+
+
+                        {% with success = get_flashed_messages(category_filter=["success"]) %}
+                        {% if success %}
+                            <div class="alert alert-success mb-3" role="alert">
+                                <ul style="list-style: none" >
+                                     {%- for msg in success %}
+                                     <li>{{ msg }}</li>
+                                     {% endfor %}
+                                </ul>
+                            </div>
+{#                                    <li class="{{ cat }}">{{message}}</li>#}
+                        {% endif %}
                         {% endwith %}
 
                         <form class="form" method="post">
                             <label>Логин:</label><br>
-                            <input type="text" class="form-control" name="login"><br>
+                            <input type="text" class="form-control" name="login" autocomplete="off"><br>
                             <label>Пароль:</label>
-                            <input type="password" class="form-control" name="passw"><br>
+                            <input type="password" class="form-control" name="passw" autocomplete="off"><br>
                             <input type="submit" class="btn btn-primary block btn-small" value="Войти">
+                            <input type="checkbox" name="remainme"> Запомнить меня
                         </form>
                         <p class="mt-2">Вы не зарегистрированы? <a href="/registration">Регистрация</a></p>
                     </div>

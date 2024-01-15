@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(128), nullable=False, unique=True)
     passw = db.Column(db.String(128), nullable=False)
     passw2 = db.Column(db.String(128), nullable=False)
-    time = db.Column(db.Integer)
+    time = db.Column(db.Date)
 
     # def __init__(self, FIO, login, passw, passw2, time):
     #     self.FIO = FIO

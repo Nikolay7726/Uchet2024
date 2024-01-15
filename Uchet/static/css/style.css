@@ -21,6 +21,9 @@ h1{
     display: block;
     width: 100%;
     border: none;
-
-
 }
+
+/*.flash.error {*/
+/*    border: 1px solid #FF4343;*/
+/*    background: #ff9c9c;*/
+/*}*/

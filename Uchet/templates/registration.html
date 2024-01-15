@@ -16,23 +16,27 @@
                 <div class="card border-dark mb-3" style="width: 25rem; margin: 90px auto auto; border-color: #1a1d20" >
 {#                    <div class="card-header" style="text-align: center">Форма регистрации</div>#}
                     <div class="card-body">
-                        {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                                <ul class="fa-flash">
-                                {% for message in messages %}
-                                    <li>{{message}}</li>
-                                {% endfor %}
+                       {% with success = get_flashed_messages(category_filter=["success"]) %}
+                        {% if success %}
+                            <div class="alert alert-success mb-3" role="alert">
+                                <ul style="list-style: none" >
+                                     {%- for msg in success %}
+                                     <li>{{ msg }}</li>
+                                     {% endfor %}
                                 </ul>
-                            {% endif %}
+                            </div>
+
+                        {% endif %}
                         {% endwith %}
+
                         <p class="mt-2" style="text-align: center"><b>Форма регистрации</b></p>
                         <form class="form" action="/registration" method="post">
                             <label>Ф.И.О:</label><br>
                             <input type="text" class="form-control" name="FIO"><br>
                             <label>Логин:</label><br>
-                            <input type="text" class="form-control" name="login"><br>
+                            <input type="text" class="form-control" name="login" autocomplete="off"><br>
                             <label>Пароль:</label>
-                            <input type="password" class="form-control" name="passw"><br>
+                            <input type="password" class="form-control" name="passw" autocomplete="off"><br>
                             <label>Повторите пароль:</label>
                             <input type="password" class="form-control" name="passw2"><br>
                             <input type="submit" class="btn btn-primary block btn-small" value="Зарегистрироваться">

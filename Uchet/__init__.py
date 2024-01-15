@@ -1,3 +1,4 @@
+import psycopg2
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -12,4 +13,8 @@ db = SQLAlchemy(app)
 app.app_context().push()
 manager = LoginManager(app)
 
-from Uchet import models, routes
+
+
+
+
+from Uchet import models, routes, DBclass
